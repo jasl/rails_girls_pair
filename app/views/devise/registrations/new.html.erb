@@ -7,6 +7,10 @@
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
+
+    <%= f.input :role, :collection => [['girl', 'Girl'], ['tutor', 'Tutor']],
+                :label_method => :last, :value_method => :first, :as => :radio,
+                :required => true %>
   </div>
 
   <div class="form-actions">

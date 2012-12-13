@@ -6,11 +6,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,                              
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  validates :role, :presence => true, :inclusion => %w(tutor girl)
+
   attr_accessible :email, :password, :password_confirmation,
-                  :nickname, :name, :gender, :bio,
-                  :role
+                  :nickname, :realname, :gender, :bio,
+                  :role, :as => [:default, :admin]
 
   attr_accessible :managable, :as => :admin
+
+  scope :tutors, where(:role => 'tutor')
+  scope :girls, where(:role => 'girl')
 
   def bind_service(response)                                                    
     provider = response["provider"]                                             

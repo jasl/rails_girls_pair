@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20121213153819) do
     t.datetime "updated_at",                                 :null => false
     t.string   "nickname"
     t.string   "bio"
-    t.string   "name"
+    t.string   "realname"
     t.boolean  "gender"
     t.boolean  "managable",              :default => false
     t.string   "role",                   :default => "girl"
