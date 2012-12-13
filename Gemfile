@@ -11,6 +11,8 @@ gem "omniauth-weibo"
 
 gem 'simple_form'
 
+gem 'thin'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -43,8 +45,7 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 group :production do
-  gem 'mysql2'
-
+  gem 'pg'
 end
 
 group :development do
