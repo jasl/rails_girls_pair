@@ -1,0 +1,12 @@
+<% @pair_result.each do |tutor, girls| %>
+  <div>
+    <h6>
+      <%= tutor %>
+    </h6>
+    <ul>
+      <% girls.each do |girl| %>
+        <li><%= girl %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

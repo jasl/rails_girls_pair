@@ -45,4 +45,9 @@ class User < ActiveRecord::Base
     @display_name ||= self.nickname.blank? ? self.email.split('@')[0] : self.nickname
   end
 
+  # for rails admin
+  def name
+    "#{self.role}-#{self.to_s}"
+  end
+
 end

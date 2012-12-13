@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'date'
 
 u = User.new :email => 'jasl9187@hotmail.com',
              :password => 'aaaaaa',
@@ -25,4 +26,7 @@ if Rails.env.development?
                  :password => "aaaaaa",
                  :role => "girl"
   end
+
+  e = Event.create! :title => 'Test',
+                    :date =>  Date.today
 end

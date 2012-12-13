@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @event.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @event.body %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @event.date %>
+</p>
+
+<% if can? :attend, Event, current_user %>
+  <p><%= "already attended" if @attended %></p>
+  <p><%= link_to 'attend', attend_event_path(@event) if Date.today == @event.date and not @attended %></p>
+<% end %>
+
+<% if can? :pairing, Event, current_user %>
+  <p><%= link_to 'pair', pairing_event_path(@event) %></p>
+<% end %>

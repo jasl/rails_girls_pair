@@ -1,3 +1,20 @@
 <% set_title "Home" %>
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+
+<% unless @event.nil? %>
+  <p>
+    <b>Title:</b>
+    <%= @event.title %>
+  </p>
+
+  <p>
+    <b>Body:</b>
+    <%= @event.body %>
+  </p>
+
+  <p>
+    <b>Date:</b>
+    <%= @event.date %>
+  </p>
+
+  <%= link_to 'detail', @event %>
+<% end %>

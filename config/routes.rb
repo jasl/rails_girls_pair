@@ -1,4 +1,12 @@
 RailsGirlsPair::Application.routes.draw do
+
+  resources :events, :only => [:index, :show] do
+    member do
+      get 'attend'
+      get 'pairing'
+    end
+  end
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   root :to => 'home#index'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213153819) do
+ActiveRecord::Schema.define(:version => 20121213175926) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -20,6 +20,27 @@ ActiveRecord::Schema.define(:version => 20121213153819) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "events", :force => true do |t|
+    t.string   "title",      :null => false
+    t.text     "body"
+    t.date     "date",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "participators", :force => true do |t|
+    t.integer  "user_id",                       :null => false
+    t.integer  "event_id",                      :null => false
+    t.boolean  "invited",    :default => false, :null => false
+    t.boolean  "attended",   :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "participators", ["event_id"], :name => "index_participators_on_event_id"
+  add_index "participators", ["user_id", "event_id"], :name => "index_participators_on_user_id_and_event_id", :unique => true
+  add_index "participators", ["user_id"], :name => "index_participators_on_user_id"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
