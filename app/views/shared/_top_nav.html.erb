@@ -9,6 +9,9 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
+          <% if can? :access, :rails_admin, current_user %>
+            <li><%= link_to 'rails admin', rails_admin_path %></li>
+          <% end %>
           <li><%= link_to 'change profile', edit_user_registration_path %></li>
           <li><%= link_to 'sign out', destroy_user_session_path, :method => :delete %></li>
         </ul>

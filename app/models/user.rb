@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   attr_accessible :email, :password, :password_confirmation,
-                  :nickname, :name, :gender, :bio
+                  :nickname, :name, :gender, :bio,
+                  :role
+
+  attr_accessible :managable, :as => :admin
 
   def bind_service(response)                                                    
     provider = response["provider"]                                             
@@ -27,6 +30,10 @@ class User < ActiveRecord::Base
                                                                                 
     clean_up_passwords                                                          
     result                                                                      
+  end
+
+  def admin?
+    self.managable
   end
 
   def to_s
