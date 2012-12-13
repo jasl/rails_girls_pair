@@ -2,12 +2,12 @@ class User < ActiveRecord::Base
   extend OmniauthCallbacks
   
   has_many :authorizations, :dependent => :destroy
-  
-
 
   devise :database_authenticatable, :registerable,                              
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  attr_accessible :email, :password, :password_confirmation,
+                  :nickname, :name, :gender, :bio
 
   def bind_service(response)                                                    
     provider = response["provider"]                                             
@@ -27,5 +27,10 @@ class User < ActiveRecord::Base
                                                                                 
     clean_up_passwords                                                          
     result                                                                      
-  end 
+  end
+
+  def to_s
+    @display_name ||= self.nickname.blank? ? self.email.split('@')[0] : self.nickname
+  end
+
 end
