@@ -1,8 +1,8 @@
 /*
- *= require bootstrap-responsive
- *= require bootstrap
  *= require_self
 */
+
+@import "compass_twitter_bootstrap";
 
 body {
     position: relative;
