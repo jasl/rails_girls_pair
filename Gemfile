@@ -15,6 +15,10 @@ gem 'thin'
 
 gem 'rails_admin'
 
+# for markdown
+gem "redcarpet"
+gem "md_emoji"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -51,8 +55,6 @@ group :production do
 end
 
 group :development do
-  gem 'sqlite3'
-
   # friendly console
   gem 'pry'
   gem 'pry-rails'
@@ -63,6 +65,8 @@ group :development do
 end
 
 group :development, :test do
+  gem 'sqlite3'
+
   gem 'rspec-rails'
   gem 'awesome_print'
   gem 'factory_girl_rails'
