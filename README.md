@@ -20,7 +20,7 @@ This app is built for rails girls to making a pair between female participants a
    2. Tutor
 
 #### 文档（指南）
-   未完成
+   属于Event的body字段
 
 #### 活动
    1. 每次活动为一次事件（Event），管理员发布活动从注册的用户中邀请用户
@@ -31,6 +31,12 @@ This app is built for rails girls to making a pair between female participants a
 #### 反馈表
    未完成，非紧急
 
+### 开发
+   1. Clone
+   2. ```bundle```
+   3. ```rake db:migrate && rake db:seed``` import demo data, default admin ```email: admin@demo.com password: aaaaaa```
+   4. Coding
+   5. Push and pull request
 
 ======
 Beijing Rubyists group, MIT license
