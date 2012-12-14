@@ -13,7 +13,7 @@
     <% if !user_signed_in? or @event.date != Date.today or @attended%>
       <%= link_to 'Warming up', @event %>
     <% else %>
-      <%= link_to 'Enjoy now!', attend_event_path(@event)%>
+      <%= link_to "I'm arrived!", attend_event_path(@event)%>
     <% end %>
 
     <h1 id="event-title">
