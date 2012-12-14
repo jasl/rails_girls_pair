@@ -1,19 +1,25 @@
 <%- set_title "Home" %>
+
+<div id="attending">
+  <%= image_tag("rg1.png", class: "pull-left") %>
+  <div class="pull-left">
+    =>
+  </div>
+  <%= image_tag("rg2.png", class: "pull-left") %>
+</div>
+
 <% unless @event.nil? %>
-  <p>
-    <b>Title:</b>
-    <%= @event.title %>
-  </p>
-
-  <p>
-    <b>Body:</b>
-    <%= markdown @event.body %>
-  </p>
-
-  <p>
-    <b>Date:</b>
-    <%= @event.date %>
-  </p>
-
-  <%= link_to 'detail', @event %>
+  <div id="event">
+    <% if user_signed_in? %>
+      <%= link_to 'Enjoy now!', attend_event_path(@event) unless @attended %>
+    <% else %>
+      <%= link_to 'Enjoy now!', new_user_registration_path %>
+    <% end %>
+    <h1 id="event-title">
+      <%= @event.title %>
+    </h1>
+    <p>
+      <%= markdown @event.body %>
+    </p>
+  </div>
 <% end %>

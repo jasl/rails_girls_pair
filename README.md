@@ -37,9 +37,10 @@ This app is built for rails girls to making a pair between female participants a
 ### 开发
    1. Clone
    2. ```bundle```
-   3. ```rake db:migrate && rake db:seed``` import demo data, default admin ```email: admin@demo.com password: aaaaaa```
-   4. Coding
-   5. Push and pull request
+   3. ```cp config/database.yml.example config/database.yml``` and edit config/database.yml
+   4. ```rake db:migrate && rake db:seed``` import demo data, default admin ```email: admin@demo.com password: aaaaaa```
+   5. Coding
+   6. Push and pull request
 
 ======
 Beijing Rubyists group, MIT license
