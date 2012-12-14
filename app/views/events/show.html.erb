@@ -23,13 +23,15 @@
   <%= markdown @event.body %>
 </div>
 
-<!-- UY BEGIN -->
-<div id="uyan_frame"></div>
-<script type="text/javascript">
-  var uyan_config = {
-    'title':'#<%= @event.title.gsub " ", "" %>#',
-    'su':'rgbj_<%= @event.id %>'
-  };
-</script>
-<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1720758" async=""></script>
-<!-- UY END -->
+<div>
+  <!-- UY BEGIN -->
+  <div id="uyan_frame"></div>
+  <script type="text/javascript">
+    var uyan_config = {
+      'title':'#<%= @event.title.gsub " ", "" %>#',
+      'su':'rgbj_<%= @event.id %>'
+    };
+  </script>
+  <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1720758" async=""></script>
+  <!-- UY END -->
+</div>
