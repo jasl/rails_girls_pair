@@ -1,3 +1,50 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#attending {
+  @include clearfix;
+
+  > div {
+    font-size: 13em;
+    font-weight: bold;
+    color: $bgColor;
+    margin: 100px 40px 100px 80px;
+  }
+
+  img {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+#event {
+  margin: 4em 0;
+  padding: 2em;
+  background: lighten($bgColor, 50%);
+  @include border-radius(10px);
+
+  h1 {
+    font-weight: normal;
+    color: #999;
+  }
+
+  p {
+    color: #666;
+  }
+
+  > a {
+    display: block;
+    float: right;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 22px;
+    @include background(
+      linear-gradient($bgColor, lighten($bgColor, 20%))
+    );
+    @include border-radius(10px);
+    @include single-box-shadow($bgColor, 5px, 5px, 5px);
+
+    &:hover {
+      background: $bgColor;
+      text-decoration: none;
+    }
+  }
+}

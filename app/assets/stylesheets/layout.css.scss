@@ -1,0 +1,30 @@
+$bgColor: #D3360B;
+$containerWidth: 940px;
+
+#main-nav {
+  .navbar-inner {
+    background: $bgColor;
+
+    .container {
+      width: $containerWidth;
+      padding: 3em 0;
+      
+      .brand {
+        color: white;
+        font-size: 3em;
+        font-weight: bold;
+      }
+
+      .nav {
+        > li > a {
+          color: white;
+          padding-top: 20px;
+        }
+      }
+    }
+  }
+}
+
+#content {
+  margin-top: 3em;
+}
