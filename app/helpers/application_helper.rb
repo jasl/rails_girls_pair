@@ -43,16 +43,4 @@ module ApplicationHelper
       title_str
     end
   end
-
-  def has_specified_javascript(js = controller_path)
-    content_for :js do
-      javascript_include_tag js
-    end
-  end
-
-  def has_specified_stylesheet(css = controller_name)
-    content_for :css do
-      stylesheet_link_tag css, :media => "all"
-    end
-  end
 end

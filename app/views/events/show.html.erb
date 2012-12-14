@@ -1,24 +1,35 @@
 <%- set_title @event.title %>
-<p>
-  <b>Title:</b>
-  <%= @event.title %>
-</p>
 
-<p>
-  <b>Body:</b>
+<div class="page-header">
+  <p class="pull-right">
+    <% if can? :attend, Event, current_user %>
+      <% if @attended %>
+        <%= link_to "Attended", "#", :class => 'btn disabled' %>
+      <% elsif Date.today == @event.date %>
+        <%= link_to 'Attend', attend_event_path(@event), :class => 'btn' %>
+      <% end %>
+    <% end %>
+
+    <% if can? :pairing, Event, current_user %>
+      <%= link_to 'Pair', pairing_event_path(@event), :class => 'btn' %>
+    <% end %>
+  </p>
+  <h1><%= @event.title %>
+    <small><%= @event.date %></small>
+  </h1>
+</div>
+
+<div>
   <%= markdown @event.body %>
-</p>
+</div>
 
-<p>
-  <b>Date:</b>
-  <%= @event.date %>
-</p>
-
-<% if can? :attend, Event, current_user %>
-  <p><%= "already attended" if @attended %></p>
-  <p><%= link_to 'attend', attend_event_path(@event) if Date.today == @event.date and not @attended %></p>
-<% end %>
-
-<% if can? :pairing, Event, current_user %>
-  <p><%= link_to 'pair', pairing_event_path(@event) %></p>
-<% end %>
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript">
+  var uyan_config = {
+    'title':'#<%= @event.title.gsub " ", "" %>#',
+    'su':'rgbj_<%= @event.id %>'
+  };
+</script>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1720758" async=""></script>
+<!-- UY END -->
