@@ -13,6 +13,10 @@ RailsGirlsPair::Application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
+  # User friendly exception handling
+  match "/404", :to => "errors#not_found"
+  match "/500", :to => "errors#error_occurred"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

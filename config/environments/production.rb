@@ -82,4 +82,7 @@ RailsGirlsPair::Application.configure do
       user_name: ENV["GMAIL_USERNAME"],
       password: ENV["GMAIL_PASSWORD"]
   }
+
+  # User friendly exception handling
+  config.exceptions_app = self.routes
 end
