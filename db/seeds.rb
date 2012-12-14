@@ -23,6 +23,7 @@ if Rails.env.development?
 
   e = Event.new
   e.title = 'Test'
+  a.summary = 'Test you know... :smile'
   e.date = Date.today
   e.save!
 end

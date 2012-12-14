@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @attended = signed_in? ? @event.participators.
+    @attended = user_signed_in? ? @event.participators.
         where(:user_id => current_user.id, :attended => true).exists? : false
 
     respond_to do |format|

@@ -19,13 +19,13 @@ class Event < ActiveRecord::Base
   has_many :attended_girls, :source => :user, :through => :participators, :readonly => true,
            :conditions => {:participators => {:attended => true}, :role => 'girl'}
 
-  validates :date, :title, :presence => false
+  validates :date, :title, :summary, :presence => false
 
   after_initialize "self.date ||= Date.today"
 
   accepts_nested_attributes_for :participators
 
-  attr_accessible :body, :date, :title, :participators_attributes, :as => :admin
+  attr_accessible :body, :summary, :date, :title, :participators_attributes, :as => :admin
 
   def pair
     tutors = self.attended_tutors.shuffle
@@ -33,14 +33,17 @@ class Event < ActiveRecord::Base
     return {} if  tutors.size * girls.size == 0
 
     t_g_ratio = (girls.size / tutors.size).to_i
-    puts "girls: #{girls.size} tutors: #{tutors.size} t_g_ratio: #{t_g_ratio}"
+    # puts "girls: #{girls.size} tutors: #{tutors.size} t_g_ratio: #{t_g_ratio}"
 
     result = {}
 
     tutors.each do |tutor|
       result.merge! tutor => girls.slice!(0, t_g_ratio)
     end
-    result.values[0] += girls
+
+    girls.each_with_index do |girl, i|
+      result.values[i]<< girl
+    end
 
     result
   end

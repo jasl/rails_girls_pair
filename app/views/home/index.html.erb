@@ -10,16 +10,17 @@
 
 <% unless @event.nil? %>
   <div id="event">
-    <% if user_signed_in? %>
-      <%= link_to 'Enjoy now!', attend_event_path(@event) unless @attended %>
+    <% if !user_signed_in? or @event.date != Date.today or @attended%>
+      <%= link_to 'Warming up', @event %>
     <% else %>
-      <%= link_to 'Enjoy now!', new_user_registration_path %>
+      <%= link_to 'Enjoy now!', attend_event_path(@event)%>
     <% end %>
+
     <h1 id="event-title">
       <%= @event.title %>
     </h1>
     <p>
-      <%= markdown @event.body %>
+      <%= markdown @event.summary %>
     </p>
   </div>
 <% end %>

@@ -17,7 +17,6 @@ gem 'rails_admin'
 
 # for markdown
 gem "redcarpet"
-gem "md_emoji"
 
 # Gems used only for assets and not required
 # in production environments by default.
