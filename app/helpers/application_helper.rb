@@ -1,27 +1,18 @@
 module ApplicationHelper
 
-  def print_error_messages resource
-    return '' if resource.errors.empty?
-    errors = resource.errors.full_messages.uniq
-    messages = errors.map { |msg| content_tag(:li, msg) }.join
-    if errors.count > 1
-      sentence = I18n.t("errors.messages.not_saved.other",
-                        :count => errors.count)
-    else
-      sentence = I18n.t("errors.messages.not_saved.one")
-    end
+  def markdown(text)
+    return "" if text.blank?
 
-    html = <<-HTML
-    <div class="alert alert-error">
-      <a class="close" data-dismiss="alert"><i class="icon-remove"></i></a>
-      <strong>#{sentence}</strong>
-      <ul>
-        #{messages}
-      </ul>
-    </div>
-    HTML
-
-    html.html_safe
+    renderer = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true)
+    options = {
+        autolink: true,
+        no_intra_emphasis: true,
+        fenced_code_blocks: true,
+        lax_html_blocks: true,
+        strikethrough: true,
+        superscript: true
+    }
+    Redcarpet::Markdown.new(renderer, options).render(text).html_safe
   end
 
   def notice_message
