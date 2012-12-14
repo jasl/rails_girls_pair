@@ -22,11 +22,20 @@ class EventsController < ApplicationController
 
   def attend
     @event.attend current_user.id
-    redirect_to @event
+
+    respond_to do |format|
+      format.html { redirect_to @event }
+      format.json { render status: created, location: @event }
+    end
   end
 
   def pairing
     @pair_result = @event.pair
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @pair_result }
+    end
   end
 
   ## GET /events/new
