@@ -21,11 +21,11 @@ class EventsController < ApplicationController
   end
 
   def attend
-    @event.attend current_user.id
+    result = @event.attend current_user.id
 
     respond_to do |format|
       format.html { redirect_to @event }
-      format.json { render status: created, location: @event }
+      format.json { render json: { result: result }, location: @event }
     end
   end
 
