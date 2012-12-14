@@ -31,6 +31,9 @@ This app is built for rails girls to making a pair between female participants a
 #### 反馈表
    未完成，非紧急
 
+### 邀请Tutors和Girls
+   页面没写，控制台下```@event.invite_tutors; @event.rand_invite_girls(size)```
+
 ### 开发
    1. Clone
    2. ```bundle```
