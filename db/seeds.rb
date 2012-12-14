@@ -20,6 +20,9 @@ if Rails.env.development?
                  :role => "girl"
   end
 
-  e = Event.create! :title => 'Test',
-                    :date =>  Date.today
+
+  e = Event.new
+  e.title = 'Test'
+  e.date = Date.today
+  e.save!
 end
