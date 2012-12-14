@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20121213175926) do
     t.integer  "event_id",                      :null => false
     t.boolean  "invited",    :default => false, :null => false
     t.boolean  "attended",   :default => false, :null => false
+    t.boolean  "applied",    :default => false, :null => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
