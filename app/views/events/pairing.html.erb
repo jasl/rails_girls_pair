@@ -1,13 +1,26 @@
 <% set_title "#{@event.title} - pairing" %>
-<% @pair_result.each do |tutor, girls| %>
-  <div>
-    <h6>
-      <%= tutor %>
-    </h6>
-    <ul>
-      <% girls.each do |girl| %>
-        <li><%= girl %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<div id="caption">
+    {
+    <%= image_tag("tutor.png") %>
+    :
+    [
+    <% 4.times do %>
+      <%= image_tag("girl.png") %>
+    <% end %>
+    ]
+    }
+</div>
+<table id="pairings" class="table table-striped">
+  <tbody>
+    <% @pair_result.each do |tutor, girls| %>
+      <tr>
+        <td class="tutor">
+          <%= tutor %>
+        </td>
+        <% girls.take(4).each do |girl| %>
+          <td class="girl"><%= girl %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>  
