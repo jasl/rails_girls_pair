@@ -1,6 +1,6 @@
 require 'date'
 class Event < ActiveRecord::Base
-  has_many :participators
+  has_many :participators, :dependent => :destroy
 
   has_many :users, :through => :participators
 
