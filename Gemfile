@@ -49,6 +49,7 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
 group :production do
   gem 'pg'
 end

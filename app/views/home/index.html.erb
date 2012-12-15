@@ -10,8 +10,10 @@
 
 <% unless @event.nil? %>
   <div id="event">
-    <% if !user_signed_in? and @event.date %>
-      <%= link_to 'Signed in and attend', @event %>
+    <% if @event.date < Date.today %>
+      <%= link_to 'Review', @event %>
+    <% elsif !user_signed_in? and @event.date == Date.today %>
+      <%= link_to 'Enjoy now!', new_user_session_path %>
     <% elsif !user_signed_in? or @event.date != Date.today or @attended%>
       <%= link_to 'Warming up', @event %>
     <% else %>
