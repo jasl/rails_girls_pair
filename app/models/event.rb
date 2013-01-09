@@ -1,35 +1,26 @@
 require 'date'
 class Event < ActiveRecord::Base
   has_many :participators, :dependent => :destroy
-
   has_many :users, :through => :participators
-
-  #has_many :tutors, :source => :user, :through => :participators,
-  #         :conditions => { :role => 'tutor' }
-  #has_many :girls, :source => :user, :through => :participators,
-  #         :conditions => { :role => 'girl' }
-
-  has_many :invited_tutors, :source => :user, :through => :participators, :readonly => true,
-           :conditions => {:participators => {:invited => true}, :role => 'tutor'}
-  has_many :invited_girls, :source => :user, :through => :participators, :readonly => true,
-           :conditions => {:participators => {:invited => true}, :role => 'girl'}
-
-  has_many :attended_tutors, :source => :user, :through => :participators, :readonly => true,
-           :conditions => {:participators => {:attended => true}, :role => 'tutor'}
-  has_many :attended_girls, :source => :user, :through => :participators, :readonly => true,
-           :conditions => {:participators => {:attended => true}, :role => 'girl'}
+  %w(tutor girl).each do |role|
+    %w(invited attended applied).each do |state|
+      define_method :"#{state}_#{role.pluralize}" do
+        users.where(:participators => {:"#{state}" => true}, :role => role)
+      end
+    end
+    define_method :"#{role.pluralize}" do
+      users.where(:role => role)
+    end
+  end
 
   validates :date, :title, :summary, :presence => false
 
-  after_initialize "self.date ||= Date.today"
-
   accepts_nested_attributes_for :participators
-
   attr_accessible :body, :summary, :date, :title, :participators_attributes, :as => :admin
 
   def pair
-    tutors = self.attended_tutors.shuffle
-    girls = self.attended_girls.shuffle
+    tutors = attended_tutors.shuffle
+    girls = attended_girls.shuffle
     return {} if  tutors.size * girls.size == 0
 
     t_g_ratio = (girls.size / tutors.size).to_i
@@ -72,16 +63,29 @@ class Event < ActiveRecord::Base
     self.save!
   end
 
-  def attend(user_id)
+  def attended?(user)
+    participators.where(:user_id => user.id, :attended => true).exists?
+  end
+
+  def attend(user)
     false if self.date != Date.today
-    if p = self.participators.where(:user_id => user_id).first
-      p.attended = true
-      p.save
-    else
-      self.participators.create({:user_id => user_id,
-                                 :attended => true},
-                                :as => :admin)
+    unless p = participators.where(:user_id => user.id).first
+      p = self.participators.build
+      p.user = user
     end
+    p.attended = true
+    p.save
+  end
+
+  def applied?(user)
+    users.where(:id => user.id).exists?
+  end
+
+  def apply(user)
+    false if applied? user
+    p = participators.build :applied => true
+    p.user = user
+    p.save
   end
 
   # for rails_admin

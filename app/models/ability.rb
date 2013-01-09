@@ -8,7 +8,7 @@ class Ability
 
     can :read, :all
 
-    if user.admin?
+    if user.managable?
       # rails admin
       can :access, :rails_admin   # grant access to rails_admin
       can :dashboard              # grant access to the dashboard
@@ -16,8 +16,7 @@ class Ability
       can :manage, :all
     elsif user.persisted?
       can :attend, Event
-    else
-
+      can :apply, Event
     end
   end
 end

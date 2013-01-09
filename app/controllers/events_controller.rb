@@ -11,8 +11,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @attended = user_signed_in? ? @event.participators.
-        where(:user_id => current_user.id, :attended => true).exists? : false
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,7 +19,16 @@ class EventsController < ApplicationController
   end
 
   def attend
-    result = @event.attend current_user.id
+    result = @event.attend current_user
+
+    respond_to do |format|
+      format.html { redirect_to @event }
+      format.json { render json: { result: result }, location: @event }
+    end
+  end
+
+  def apply
+    result = @event.apply current_user
 
     respond_to do |format|
       format.html { redirect_to @event }

@@ -37,10 +37,6 @@ class User < ActiveRecord::Base
     result                                                                      
   end
 
-  def admin?
-    self.managable
-  end
-
   def to_s
     @display_name ||= self.nickname.blank? ? self.email.split('@')[0] : self.nickname
   end

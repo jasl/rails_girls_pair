@@ -2,12 +2,14 @@
 
 <div class="page-header">
   <p class="pull-right">
-    <% if can? :attend, Event, current_user %>
-      <% if @attended %>
-        <%= link_to "Attended", "#", :class => 'btn disabled' %>
-      <% elsif Date.today == @event.date %>
-        <%= link_to 'Attend', attend_event_path(@event), :class => 'btn' %>
-      <% end %>
+    <% if able_to_apply?(@event) %>
+      <%= link_to 'Apply', attend_event_path(@event), :method => :post, :class => 'btn' %>
+    <% end %>
+
+    <% if able_to_attend?(@event) %>
+      <%= link_to 'Attend', attend_event_path(@event), :method => :post, :class => 'btn' %>
+    <% elsif can? :attend, @event and @event.attended?(current_user) %>
+      <%= link_to "Attended", "#", :class => 'btn disabled' %>
     <% end %>
 
     <% if can? :pairing, Event, current_user %>

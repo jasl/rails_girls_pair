@@ -21,9 +21,9 @@ if Rails.env.development?
   end
 
 
-  e = Event.new
-  e.title = 'Test'
-  a.summary = 'Test you know... :smile'
-  e.date = Date.today
-  e.save!
+  Event.create!({:title => 'Test',
+                 :summary => 'Test you know... :smile',
+                 :body => 'TTTTTTEEEEESSSSSTTTTTT',
+                 :date => Date.today+1},
+                :as => :admin)
 end

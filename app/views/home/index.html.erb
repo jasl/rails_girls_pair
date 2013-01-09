@@ -10,19 +10,25 @@
 
 <% unless @event.nil? %>
   <div id="event">
-    <% if @event.date < Date.today %>
-      <%= link_to 'Review', @event %>
-    <% elsif !user_signed_in? and @event.date == Date.today %>
-      <%= link_to 'Enjoy now!', new_user_session_path %>
-    <% elsif !user_signed_in? or @event.date != Date.today or @attended%>
-      <%= link_to 'Warming up', @event %>
+    <% if @event.date > Date.today %>
+      <%= link_to "Join", apply_event_path(@event), :method => :post if able_to_apply? @event %>
+      <%= link_to 'Detail', @event %>
+    <% elsif @event.date == Date.today %>
+      <% if able_to_attend?(@event) %>
+        <%= link_to "I'm arrived!", attend_event_path(@event), :method => :post %>
+      <% elsif user_signed_in? %>
+        <%= link_to 'Warming up', @event %>
+      <% else %>
+        <%= link_to 'Enjoy now!', new_user_session_path %>
+      <% end %>
     <% else %>
-      <%= link_to "I'm arrived!", attend_event_path(@event)%>
+      <%= link_to 'Review', @event %>
     <% end %>
 
     <h1 id="event-title">
       <%= @event.title %>
       <small><%= @event.date %></small>
+      <small><%= @event.participators_count %>人报名</small>
     </h1>
     <p>
       <%= markdown @event.summary %>

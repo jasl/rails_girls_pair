@@ -2,7 +2,8 @@ RailsGirlsPair::Application.routes.draw do
 
   resources :events, :only => [:index, :show] do
     member do
-      get 'attend'
+      post 'attend'
+      post 'apply'
       get 'pairing'
     end
   end
