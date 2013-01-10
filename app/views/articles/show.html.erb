@@ -1,0 +1,10 @@
+<%- set_title "blog - #{@article.title}" -%>
+<div class="header">
+  <h1><%= @article.title -%></h1>
+  <small><%= readable_date @article.created_at -%></small>
+  <hr />
+</div>
+<div class="body">
+  <%= markdown @article.body -%>
+</div>
+

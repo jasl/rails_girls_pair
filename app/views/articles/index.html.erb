@@ -1,0 +1,13 @@
+<%- set_title 'blog' -%>
+<ul class="list">
+ <%= content_tag_for :li, @articles do |a| -%>
+   <div class="header">
+     <h1><%= link_to a.title, a -%></h1>
+     <small><%= readable_date a.created_at -%></small>
+     <hr />
+   </div>
+   <div class="body">
+     <%= markdown a.body -%>
+   </div>
+ <%- end -%>
+</ul>

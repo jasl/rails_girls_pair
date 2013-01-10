@@ -1,5 +1,6 @@
 RailsGirlsPair::Application.routes.draw do
 
+  resources :articles, :only => [:index, :show]
   resources :events, :only => [:index, :show] do
     member do
       post 'attend'
@@ -7,6 +8,7 @@ RailsGirlsPair::Application.routes.draw do
       get 'pairing'
     end
   end
+  get '/about', :to => 'home#about'
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
